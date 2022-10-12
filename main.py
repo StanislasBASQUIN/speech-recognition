@@ -1,16 +1,21 @@
+import datetime
+
 import pywhatkit
 import speech_recognition as sr
 import pyttsx3 as ttx
+import datetime
 
 
 listener = sr.Recognizer() # Ecoute sur les peripheriques
 engine = ttx.init() # Permet à la machine de répondre
 voice = engine.getProperty('voices') #
-engine.setProperty('voice', 'french') # configurer la voix de la machine en anglais
+engine.setProperty('voice', 'french') # configurer la voix de la machine en français
+
 
 def parler(text):
     engine.say(text)  # Machine prononce la commande enregistrée
     engine.runAndWait()
+
 
 
 def ecouter():
@@ -19,10 +24,11 @@ def ecouter():
         with sr.Microphone() as source: # Branchement du programme sur micro
             print("Merci de parler maintenant")
             voix = listener.listen(source) # Enregistrement de la Voix
-            command = listener.recognize_google(voix, language="fr-FR") # Interpretation de la Voix
+            command = listener.recognize_google(voix, language='fr-FR') # Interpretation de la Voix user
             return command
     except:
         pass
+
 
 
 def lancer_assistant():
@@ -34,5 +40,13 @@ def lancer_assistant():
         pywhatkit.playonyt(chanteur)
 
 
-    elif 'heure'
+    elif 'heure' in command:
+        heure = datetime.datetime.now().strftime('%H heure %M') # Format Time in String.
+        parler('Il est: '+heure)
+
+
+    elif 'bonjour' in command:
+        parler('Bonjour how are you friend?')
+
+
 lancer_assistant()
