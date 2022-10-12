@@ -1,18 +1,32 @@
 import speech_recognition as sr
+import pyttsx3 as ttx
 
-listener = sr.Recognizer()
-engine = ttx.init()
+listener = sr.Recognizer() # Ecoute sur les peripheriques
+engine = ttx.init() # Permet à la machine de répondre
+voice = engine.getProperty('voices') #
+engine.setProperty('voice', 'french') # configurer la voix de la machine en anglais
 
-voice =
+def parler(text):
+    engine.say(text)  # Machine prononce la commande enregistrée
+    engine.runAndWait()
 
 
-try:
-    with sr.Microphone() as source:
-        print("Merci de parler maintenant")
-        voice = listener.listen(source)
-        command = listener.recognize_google(voice)
-        print(command)
+def ecouter():
+    # On utilise Try Except pour gérer les erreurs
+    try:
+        with sr.Microphone() as source: # Branchement du programme sur micro
+            print("Merci de parler maintenant")
+            voix = listener.listen(source) # Enregistrement de la Voix
+            command = listener.recognize_google(voix, language="fr-FR") # Interpretation de la Voix
+    except:
+        pass
+    return command
 
-except:
-    pass
+def lancer_assistant():
+    command = ecouter()
+    print(command)
+    if 'Bonjour' in command:
+        text = 'Bonjour Stanislas'
+        parler(text)
 
+lancer_assistant
