@@ -20,21 +20,19 @@ def ecouter():
             print("Merci de parler maintenant")
             voix = listener.listen(source) # Enregistrement de la Voix
             command = listener.recognize_google(voix, language="fr-FR") # Interpretation de la Voix
+            return command
     except:
         pass
-    return command
-
 
 
 def lancer_assistant():
     command = ecouter()
     print(command)
     if 'jouer le morceau de' in command:
-        chanteur = command.replace('jouer le morceau de', '')
+        chanteur = command.replace('jouer le morceau de', '') # Ne conserver que le nom du chanteur dans la command
         print(chanteur)
         pywhatkit.playonyt(chanteur)
-        #text = 'Bonjour Stanislas'
-        #parler(text)
 
 
+    elif 'heure'
 lancer_assistant()
