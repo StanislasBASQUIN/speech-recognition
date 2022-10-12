@@ -1,5 +1,7 @@
+import pywhatkit
 import speech_recognition as sr
 import pyttsx3 as ttx
+
 
 listener = sr.Recognizer() # Ecoute sur les peripheriques
 engine = ttx.init() # Permet à la machine de répondre
@@ -22,11 +24,17 @@ def ecouter():
         pass
     return command
 
+
+
 def lancer_assistant():
     command = ecouter()
     print(command)
-    if 'Bonjour' in command:
-        text = 'Bonjour Stanislas'
-        parler(text)
+    if 'jouer le morceau de' in command:
+        chanteur = command.replace('jouer le morceau de', '')
+        print(chanteur)
+        pywhatkit.playonyt(chanteur)
+        #text = 'Bonjour Stanislas'
+        #parler(text)
 
-lancer_assistant
+
+lancer_assistant()
