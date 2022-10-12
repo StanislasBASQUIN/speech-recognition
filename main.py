@@ -1,13 +1,15 @@
 import pywhatkit
 import speech_recognition as sr
-import pyttsx3 as ttx
+import pyttsx3
 import datetime
 
 
 listener = sr.Recognizer() # Ecoute sur les peripheriques
-engine = ttx.init() # Permet à la machine de répondre
+engine = pyttsx3.init() # Permet à la machine de répondre
 voice = engine.getProperty('voices') #
-engine.setProperty('voice', 'french') # configurer la voix de la machine en français
+for v in voice:
+    print(v)
+engine.setProperty('voice', voice[3].id) # configurer la voix de la machine en français
 
 
 def parler(text):
@@ -39,12 +41,12 @@ def lancer_assistant():
 
 
     elif 'heure' in command:
-        heure = datetime.datetime.now().strftime('%H heure %M') # Format Time in String.
-        parler('Il est: '+heure)
+        heure = datetime.datetime.now().strftime('%H hour and %M minutes') # Format Time in String.
+        parler('It is : '+heure)
 
 
     elif 'bonjour' in command:
-        parler('Bonjour how are you friend?')
+        parler('Good Morning, how are you friend?')
 
 
 lancer_assistant()
